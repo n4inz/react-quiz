@@ -1,4 +1,5 @@
-import React , { useState } from "react";
+import {useNavigate } from 'react-router-dom'
+import React , { useEffect, useState } from "react";
 import BgHome from  './../../assets/images/homeBg.jpeg';
 import Setting from './../../assets/icon/setting.png';
 import Speaker from './../../assets/icon/speaker.png';
@@ -7,28 +8,57 @@ import Keislaman from './../../assets/icon/keislaman.png';
 import Fiqih from './../../assets/icon/fiqih.png';
 import Akidah from './../../assets/icon/akidah.png';
 import Modal from './Modal/index';
-
+import axios from "axios";
+import Endpoint from './../../components/config/api'
+import { Context } from "../../App";
 
 
 const Home = () => {
+    const value = React.useContext(Context);  
+    const navigate = useNavigate();
+
+    // const [muted, setMuted] = useState(false)
 
     const [modal, setModal] = useState('hidden');
-    const [submit, setSubmit] = useState({
-        'level' : 'sd',
-        'type' : ''
-    });
-
     const toggle = () => {
         setModal('')
     }
 
     const submits = (e) => {
-        const data = {...submit}
+        const data = {...value.kriteria}
         data['type'] = e.target.value
-        setSubmit(data);
+        value.setKriteria(data);
+        value.setPoin(0);
+        axios.get(`${Endpoint}total?level=${value.kriteria.level}&type=${e.target.value}`)
+        .then(function (response) {
+            const acak = response.data.data.sort(() => Math.random() - 0.5);
+            value.setSoal(acak)
+            navigate('/quiz')
+        });
+
+        return false;
     }
 
-    console.log(submit)
+    const playAudio = () => {
+         
+ 
+
+        const data = {...value.audio}
+            data.play = !data.play
+        value.setAudio( data )
+
+        if(value.audio.play == false){
+            // alert('nyala')
+            value.audio.audio.play()
+        }
+        if(value.audio.play == true){
+            // alert('mati')
+            value.audio.audio.pause()
+        }
+        
+        
+    }
+    console.log(value.audio)
 
     return (
         <>
@@ -37,12 +67,12 @@ const Home = () => {
                     <div onClick={toggle} className="float-right w-7 shadow-sm rounded-full hover:cursor-pointer">
                         <img src={Setting} alt="" />
                     </div>
-                    <div className="float-left w-12 shadow-sm rounded-full hover:cursor-pointer">
+                    <div onClick={playAudio} className="relative float-left w-12 shadow-sm rounded-full hover:cursor-pointer">
+                        
                         <img src={Speaker} alt="" />
+                        <div className={`${value.audio.play ? "hidden" : ""} h-[2px] w-7 -rotate-45  rounded-full bg-slate-700 absolute top-3 left-2`}/>
                     </div>
                 </div>
-
-
                     <div className=" mt-20 grid grid-cols-2 gap-4 uppercase">
             
                         <label htmlFor="1">
@@ -92,7 +122,7 @@ const Home = () => {
                 <Modal
                     isOpen={modal}
                     modal={(val) => setModal(val)}
-                    value={(val) => setSubmit(val)}
+                    value={(val) => value.setKriteria(val)}
                 />
      
             </div>

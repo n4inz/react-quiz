@@ -54,7 +54,7 @@ function Index(props) {
                                         <img src={Sd} alt="" />
                                     </div>
                                     <span className='text-3xl'>Sd</span>
-                                    <input value="sd" hidden id='pilih1' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih1 == 'bg-green-300' } />
+                                    <input value="SD" hidden id='pilih1' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih1 == 'bg-green-300' } />
                                 </div>
                             </label>
 
@@ -64,7 +64,7 @@ function Index(props) {
                                         <img src={Smp} alt="" />
                                     </div>
                                     <span className='text-3xl'>Smp</span>
-                                    <input value="smp" hidden id='pilih2' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih2 == 'bg-green-300' } />
+                                    <input value="SMP" hidden id='pilih2' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih2 == 'bg-green-300' } />
                                 </div>
                             </label>
 
@@ -74,7 +74,7 @@ function Index(props) {
                                         <img src={Sma} alt="" />
                                     </div>
                                     <span className='text-3xl'>Sma</span>
-                                    <input value="sma" id='pilih3' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih3 == 'bg-green-300' } />
+                                    <input value="SMA" id='pilih3' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih3 == 'bg-green-300' } />
                                 </div>
                             </label>
                         </div>

@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import BgQuiz from './../../assets/images/bgQuiz.jpeg'
 import Skor from './../../assets/icon/skor.png';
-
-
+import { Context } from "../../App";
+import {useNavigate } from 'react-router-dom';
+import axios from "axios";
 const Hasil = () => {
-
+    const value = React.useContext(Context);
     const [isOpen, setIsOpen] = useState('hidden')
+    const navigate = useNavigate();
 
+    const home = () => {
+        value.setPoin(0)
+        navigate('/home')
+      
+    }
+
+    const ulang = () => {
+        value.setPoin(0)
+        const acak = value.soal.sort(() => Math.random() - 0.5);
+        value.setSoal(acak)
+        navigate('/quiz')
+    }
 
     return (
         <>
@@ -32,15 +46,15 @@ const Hasil = () => {
 
                             <div className="flex flex-col justify-center items-center text-center">
                                 
-                                <span className='text-3xl text-blue-400 font-bold'>60</span>
+                                <span className='text-3xl text-blue-400 font-bold'>{value.poin}</span>
                                 <div className='w-16'>
                                     <img src={Skor} alt="Skor" />
                                 </div>
                             </div>
 
                             <div className='text-center space-x-3 py-5'>
-                                <button className='p-2 bg-blue-600 rounded-md text-gray-200 font-bold'>Ulangi</button>
-                                <button className='p-2 bg-blue-600 rounded-md text-gray-200 font-bold'>Home</button>
+                                <button onClick={ulang} className='p-2 bg-blue-600 rounded-md text-gray-200 font-bold'>Ulangi</button>
+                                <button onClick={home} className='p-2 bg-blue-600 rounded-md text-gray-200 font-bold'>Home</button>
 
                             </div>
                             
