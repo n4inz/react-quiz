@@ -11,26 +11,32 @@ import Modal from './Modal/index';
 import axios from "axios";
 import Endpoint from './../../components/config/api'
 import { Context } from "../../App";
-
+import Music from './../../assets/audio/a.mp3';
 
 const Home = () => {
     const value = React.useContext(Context);  
     const navigate = useNavigate();
-
-    // const [muted, setMuted] = useState(false)
 
     const [modal, setModal] = useState('hidden');
     const toggle = () => {
         setModal('')
     }
 
+
+    //    
+
     const submits = (e) => {
         const data = {...value.kriteria}
         data['type'] = e.target.value
         value.setKriteria(data);
         value.setPoin(0);
+        value.audio.audio.pause()
         axios.get(`${Endpoint}total?level=${value.kriteria.level}&type=${e.target.value}`)
         .then(function (response) {
+            if(response.data.data.length == 0) {
+                navigate('/404')
+                return false;
+            }
             const acak = response.data.data.sort(() => Math.random() - 0.5);
             value.setSoal(acak)
             navigate('/quiz')
@@ -41,24 +47,22 @@ const Home = () => {
 
     const playAudio = () => {
          
- 
-
         const data = {...value.audio}
             data.play = !data.play
-        value.setAudio( data )
+            data.playHome = !data.playHome
+            value.setAudio( data )
 
-        if(value.audio.play == false){
+        if(value.audio.playHome == false){
             // alert('nyala')
             value.audio.audio.play()
         }
-        if(value.audio.play == true){
+        if(value.audio.playHome == true){
             // alert('mati')
             value.audio.audio.pause()
         }
         
         
     }
-    console.log(value.audio)
 
     return (
         <>

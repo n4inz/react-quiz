@@ -11,12 +11,19 @@ const Hasil = () => {
 
     const home = () => {
         value.setPoin(0)
+        if(value.audio.playHome == true){
+            value.audio.audio.play()
+        }
+        if(value.audio.playHome == false){
+            value.audio.audio.pause()
+        }
         navigate('/home')
       
     }
 
     const ulang = () => {
         value.setPoin(0)
+       
         const acak = value.soal.sort(() => Math.random() - 0.5);
         value.setSoal(acak)
         navigate('/quiz')

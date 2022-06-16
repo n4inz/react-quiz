@@ -8,7 +8,7 @@ import Home from './components/home';
 import Login from './components/login/Login';
 import Quiz from './components/quiz';
 import Register from './components/register/register';
-import Image from './logo.svg'
+import Error from './components/404/'
 export const Context = React.createContext();
 
 function App() {
@@ -22,7 +22,8 @@ function App() {
   const [audio,setAudio] = useState({
     'audio' : new Audio(Song),
     'audioClick' : new Audio(SongClick),
-    'play' : false
+    'play' : false,
+    'playHome' : false
 })
   return (
     <Context.Provider value={{ soal, setSoal , kriteria, setKriteria, poin, setPoin, audio,setAudio }}>
@@ -33,6 +34,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/hasil" element={<Hasil />} />
+          <Route path="/404" element={< Error/>} />
         </Routes>
       </BrowserRouter>
     </Context.Provider>

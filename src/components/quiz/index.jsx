@@ -12,10 +12,19 @@ const Quiz = () => {
     const [page, setPage] = useState(0);
     const [poin,setPoin] = useState(0);
     const navigate = useNavigate();
+    const [down, setDown] = useState(3);
+    const timer = () => setDown(down - 1);
     useEffect(() => {
-    
-        fetchData()
-      }, [])
+        if (down <= 0) {
+            fetchData()
+            return;
+        }
+        const id = setInterval(timer, 1000);
+        return () => {
+            clearInterval(id);
+            
+        }
+      }, [down])
 
     async function fetchData() {
     const request = await axios.get(`${Endpoint}?page=${value.soal[page]}&level=${value.kriteria.level}&type=${value.kriteria.type}`)
@@ -24,8 +33,18 @@ const Quiz = () => {
     }
 
     const next = (pilihan, poins) => {
+        if(value.audio.playHome == true){
+            // alert('nyala')
+            value.audio.audioClick.play()
+        }
+        if(value.audio.playHome == false){
+            // alert('mati')
+            value.audio.audioClick.pause()
+        }
 
-        value.audio.audioClick.play()
+      
+
+        setDown(3)
         if(value.soal.length-1 == page-1){
             navigate('/hasil')
             return false;
@@ -45,13 +64,12 @@ const Quiz = () => {
     console.log()
     return (
         <div className="font-IndieFlower mx-auto flex flex-col items-center justify-center bg-cover h-screen  px-7 sm:px-6 lg:px-8" style={{ backgroundImage: `url(${BgQuiz})` }}>
-            {/* <span className='text-6xl text-gray-50 font-semibold'>Oops !</span>
-            <p className='text-gray-50 text-3xl text-center'>Type dan level ini belum tersedia</p>
-            <button onClick={() => navigate('/home')} className='p-2 bg-blue-600 rounded-md text-gray-200 font-bold'>Home</button> */}
+            <span className={`${down == 0 ? "hidden" : ""} text-6xl text-gray-50 font-semibold`}>{down}</span>
+            
             
             {data.map((e) => {
                 return (
-                    <div key={e.id}>
+                    <div className={`${down == 0 ? "" : "hidden"}`} key={e.id}>
                     <div className='text-center'>
                         <span className=" text-2xl text-gray-100 font-semibold">{e.s_soal}</span>
                         <span></span>
