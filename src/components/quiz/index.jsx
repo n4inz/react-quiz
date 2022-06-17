@@ -51,7 +51,6 @@ const Quiz = () => {
         }
         if(pilihan == 1){
             value.setPoin(parseInt(value.poin)+parseInt(poins))
-            console.log(value.poin)
         }
         axios.get(`${Endpoint}?page=${value.soal[page+1]}&level=${value.kriteria.level}&type=${value.kriteria.type}`)
         .then((e) => {
@@ -60,8 +59,6 @@ const Quiz = () => {
         })
 
     }
-
-    console.log()
     return (
         <div className="font-IndieFlower mx-auto flex flex-col items-center justify-center bg-cover h-screen  px-7 sm:px-6 lg:px-8" style={{ backgroundImage: `url(${BgQuiz})` }}>
             <span className={`${down == 0 ? "hidden" : ""} text-6xl text-gray-50 font-semibold`}>{down}</span>

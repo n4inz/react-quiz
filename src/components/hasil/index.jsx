@@ -6,7 +6,6 @@ import {useNavigate } from 'react-router-dom';
 import axios from "axios";
 const Hasil = () => {
     const value = React.useContext(Context);
-    const [isOpen, setIsOpen] = useState('hidden')
     const navigate = useNavigate();
 
     const home = () => {

@@ -1,4 +1,4 @@
-import {useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom';
 import React , { useEffect, useState } from "react";
 import BgHome from  './../../assets/images/homeBg.jpeg';
 import Setting from './../../assets/icon/setting.png';

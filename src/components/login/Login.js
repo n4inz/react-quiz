@@ -1,7 +1,9 @@
 import React from "react";
+import {useNavigate } from 'react-router-dom'
 import Images from './../../assets/images/bg.jpg';
 import Logo from '../../assets/images/ass.png'
 function Login() {
+  const navigate = useNavigate();
     return (
         <div className=" font-IndieFlower  bg-cover h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8" style={{ backgroundImage: 'url('+Images+')' }}>
           <div className="max-w-md w-full space-y-8">
@@ -45,6 +47,7 @@ function Login() {
                     placeholder="Password"
                   />
                 </div>
+                <p className="float-right p-5 text-gray-800 font-bold">Belum punya akun ? <span onClick={() => navigate('/register')} className="text-blue-600 hover:cursor-pointer">Daftar</span></p>
               </div>
               <div>
                 <button
@@ -54,6 +57,7 @@ function Login() {
 
                   Sign in
                 </button>
+
               </div>
             </form>
           </div>
