@@ -2,14 +2,15 @@ import React , { useState } from "react";
 import Sd from './../../../assets/icon/sd.png';
 import Smp from './../../../assets/icon/smp.png';
 import Sma from './../../../assets/icon/Sma.png';
+import { Context } from "../../../App";
 
 function Index(props) {
-
- const [select, setSelect] = useState({
-    'pilih1' : 'bg-green-300',
-    'pilih2': '',
-    'pilih3':''
- });
+    const value = React.useContext(Context);  
+//  const [select, setSelect] = useState({
+//     'pilih1' : 'bg-green-300',
+//     'pilih2': '',
+//     'pilih3':''
+//  });
 
 
  
@@ -20,12 +21,12 @@ function Index(props) {
 
     const setPilih = (e) => {
 
-        const data = {...select}
+        const data = {...value.select}
         data['pilih1'] = '';
         data['pilih2'] = '';
         data['pilih3'] = '';
         data[e.target.id] = 'bg-green-300'
-        setSelect(data)
+        value.setSelect(data)
 
         const submit = {
             'level' : e.target.value,
@@ -49,32 +50,32 @@ function Index(props) {
                     <div className="p-6 space-y-6">
                         <div className='space-y-3'>
                             <label  htmlFor="pilih1">
-                                <div className={`${select.pilih1} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
+                                <div className={`${value.select.pilih1} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
                                     <div className='w-20'>
                                         <img src={Sd} alt="" />
                                     </div>
                                     <span className='text-3xl'>Sd</span>
-                                    <input value="SD" hidden id='pilih1' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih1 == 'bg-green-300' } />
+                                    <input value="SD" hidden id='pilih1' type="radio" name='level' className="hidden" onChange={setPilih} checked={value.select.pilih1 == 'bg-green-300' } />
                                 </div>
                             </label>
 
                             <label onChange={setPilih} htmlFor="pilih2">
-                                <div className={`${select.pilih2} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
+                                <div className={`${value.select.pilih2} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
                                     <div className='w-20'>
                                         <img src={Smp} alt="" />
                                     </div>
                                     <span className='text-3xl'>Smp</span>
-                                    <input value="SMP" hidden id='pilih2' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih2 == 'bg-green-300' } />
+                                    <input value="SMP" hidden id='pilih2' type="radio" name='level' className="hidden" onChange={setPilih} checked={value.select.pilih2 == 'bg-green-300' } />
                                 </div>
                             </label>
 
                             <label onChange={setPilih} htmlFor="pilih3">
-                                <div className={`${select.pilih3} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
+                                <div className={`${value.select.pilih3} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
                                     <div className='w-20'>
                                         <img src={Sma} alt="" />
                                     </div>
                                     <span className='text-3xl'>Sma</span>
-                                    <input value="SMA" id='pilih3' type="radio" name='level' className="hidden" onChange={setPilih} checked={select.pilih3 == 'bg-green-300' } />
+                                    <input value="SMA" id='pilih3' type="radio" name='level' className="hidden" onChange={setPilih} checked={value.select.pilih3 == 'bg-green-300' } />
                                 </div>
                             </label>
                         </div>

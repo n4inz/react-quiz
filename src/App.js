@@ -21,6 +21,12 @@ function App() {
       'type' : ''
   })
 
+  const [select, setSelect] = useState({
+    'pilih1' : 'bg-green-300',
+    'pilih2': '',
+    'pilih3':''
+ });
+
   useEffect(() => {
     if(cookies.get('credensial')){
       setIsLogin(true)
@@ -35,7 +41,7 @@ function App() {
     'playHome' : false
 })
   return (
-    <Context.Provider value={{ soal, setSoal , kriteria, setKriteria, poin, setPoin, audio,setAudio, isLogin, setIsLogin }}>
+    <Context.Provider value={{ soal, setSoal , kriteria, setKriteria, poin, setPoin, audio,setAudio, isLogin, setIsLogin, select, setSelect }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Login />} />

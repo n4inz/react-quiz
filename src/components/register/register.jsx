@@ -45,7 +45,7 @@ function Register() {
    const sumbit = async () => {
     setButton(true)
     try {
-      const response = await axios.post(`${Endpoint}register`, data)
+      const response = await axios.post(`${Endpoint}/register`, data)
       Cookies.set('credensial', response.data, { path: '/' });
       navigate('/home')
     }

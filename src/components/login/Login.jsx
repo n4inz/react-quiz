@@ -40,7 +40,7 @@ function Login() {
   const sumbit = async () => {
     setButton(true)
     try {
-      const response = await axios.post(`${Endpoint}login`, data)
+      const response = await axios.post(`${Endpoint}/login`, data)
       cookies.set('credensial', response.data, { path: '/' });
       navigate('/home')
     }
