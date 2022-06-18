@@ -27,7 +27,11 @@ const Quiz = () => {
       }, [down])
 
     async function fetchData() {
-    const request = await axios.get(`${Endpoint}?page=${value.soal[page]}&level=${value.kriteria.level}&type=${value.kriteria.type}`)
+    const request = await axios({
+        method : 'get',
+        headers: { 'Content-Type': 'application/json'},
+        url: `${Endpoint}?page=${value.soal[page]}&level=${value.kriteria.level}&type=${value.kriteria.type}`
+    })
     setData(request.data.data.data)
     return request
     }
@@ -52,13 +56,19 @@ const Quiz = () => {
         if(pilihan == 1){
             value.setPoin(parseInt(value.poin)+parseInt(poins))
         }
-        axios.get(`${Endpoint}?page=${value.soal[page+1]}&level=${value.kriteria.level}&type=${value.kriteria.type}`)
+        axios({
+            method : 'get',
+            headers: { 'Content-Type': 'application/json'},
+            url : `${Endpoint}?page=${value.soal[page+1]}&level=${value.kriteria.level}&type=${value.kriteria.type}`
+        })
         .then((e) => {
             setData(e.data.data.data)
             setPage(page+1)
         })
 
     }
+
+    console.log(data)
     return (
         <div className="font-IndieFlower mx-auto flex flex-col items-center justify-center bg-cover h-screen  px-7 sm:px-6 lg:px-8" style={{ backgroundImage: `url(${BgQuiz})` }}>
             <span className={`${down == 0 ? "hidden" : ""} text-6xl text-gray-50 font-semibold`}>{down}</span>
@@ -66,10 +76,18 @@ const Quiz = () => {
             
             {data.map((e) => {
                 return (
-                    <div className={`${down == 0 ? "" : "hidden"}`} key={e.id}>
-                    <div className='text-center'>
+                    <div className={`${down == 0 ? "" : "hidden"} flex flex-col items-center`} key={e.id}>
+                    <div className='text-center flex flex-col items-center'>
                         <span className=" text-2xl text-gray-100 font-semibold">{e.s_soal}</span>
-                        <span></span>
+                        {
+                            !e.s_gambar ? 
+                            (<span></span>): 
+                            (
+                                <div className='w-32 h-32'>
+                                    <img  src={`https://quiz.nainz.my.id/Soal/${e.s_gambar}`} alt="img" />
+                                </div>
+                            )
+                        }
                     </div>
                     <div id="1" className='relative grid grid-cols-2 gap-12   mt-10 text-sm font-bold text-gray-100'>
                         {/* Text */}
@@ -89,7 +107,7 @@ const Quiz = () => {
                                     return (
                                         // <h1 onClick={() => next(jawab.j_jawaban_benar, e.s_poin)} >{jawab.j_type}</h1>
                                         <div key={jawab.id} onClick={() => next(jawab.j_jawaban_benar, e.s_poin)}  className=' hover:cursor-pointer flex justify-center items-center w-40 h-40 text-center p-2'>
-                                            <img  src={`http://127.0.0.1:8000/Soal/${jawab.j_jawaban}`} alt="img" />
+                                            <img  src={`https://quiz.nainz.my.id/Soal/${jawab.j_jawaban}`} alt="img" />
                                         </div> 
                                     )
                                 }

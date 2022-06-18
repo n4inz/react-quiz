@@ -25,13 +25,14 @@ const Home = () => {
 
     //    
 
-    const submits = (e) => {
+    const submits = async (e) => {
+
         const data = {...value.kriteria}
         data['type'] = e.target.value
         value.setKriteria(data);
         value.setPoin(0);
         value.audio.audio.pause()
-        axios.get(`${Endpoint}total?level=${value.kriteria.level}&type=${e.target.value}`)
+        axios.get(`${Endpoint}/total?level=${value.kriteria.level}&type=${e.target.value}`)
         .then(function (response) {
             if(response.data.data.length == 0) {
                 navigate('/404')
@@ -43,6 +44,24 @@ const Home = () => {
         });
 
         return false;
+
+        // const data = {...value.kriteria}
+        // data['type'] = e.target.value
+        // value.setKriteria(data);
+        // value.setPoin(0);
+        // value.audio.audio.pause()
+        // axios.get(`${Endpoint}total?level=${value.kriteria.level}&type=${e.target.value}`)
+        // .then(function (response) {
+        //     if(response.data.data.length == 0) {
+        //         navigate('/404')
+        //         return false;
+        //     }
+        //     const acak = response.data.data.sort(() => Math.random() - 0.5);
+        //     value.setSoal(acak)
+        //     navigate('/quiz')
+        // });
+
+        // return false;
     }
 
     const playAudio = () => {
