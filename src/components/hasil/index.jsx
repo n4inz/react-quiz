@@ -31,7 +31,7 @@ const Hasil = () => {
 
 
     async function postData() {
-       
+        const token = cookies.get('credensial'); 
         const request = await axios({
             method : 'post',
             headers: { 'Content-Type': 'application/json'},

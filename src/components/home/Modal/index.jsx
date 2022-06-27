@@ -50,7 +50,7 @@ function Index(props) {
                     <div className="p-6 space-y-6">
                         <div className='space-y-3'>
                             <label  htmlFor="pilih1">
-                                <div onClick={close} className={`${value.select.pilih1} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
+                                <div onClick={close} className={`${value.select.pilih1} hover:cursor-pointer hover:bg-green-400 w-full flex items-center space-x-8 p-1 rounded`}>
                                     <div className='w-20'>
                                         <img src={Sd} alt="" />
                                     </div>
@@ -60,7 +60,7 @@ function Index(props) {
                             </label>
 
                             <label onChange={setPilih} htmlFor="pilih2">
-                                <div onClick={close} className={`${value.select.pilih2} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
+                                <div onClick={close} className={`${value.select.pilih2} hover:cursor-pointer hover:bg-green-400 w-full flex items-center space-x-8 p-1 rounded`}>
                                     <div className='w-20'>
                                         <img src={Smp} alt="" />
                                     </div>
@@ -70,7 +70,7 @@ function Index(props) {
                             </label>
 
                             <label onChange={setPilih} htmlFor="pilih3">
-                                <div onClick={close} className={`${value.select.pilih3} hover:cursor-pointer w-full flex items-center space-x-8 p-1 rounded`}>
+                                <div onClick={close} className={`${value.select.pilih3} hover:cursor-pointer hover:bg-green-400 w-full flex items-center space-x-8 p-1 rounded`}>
                                     <div className='w-20'>
                                         <img src={Sma} alt="" />
                                     </div>
